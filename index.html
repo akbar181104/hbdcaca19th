@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HBD CACAA 19TH!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&family=Fugaz+One&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#111017;
+      --bg-2:#221b3a;
+      --accent:#ff77e9;
+      --accent2:#5ef3ff;
+      --card:#1a1530cc;
+      --glass:rgba(255,255,255,.08);
+      --text:#f5f7ff;
+      --muted:#c9c9d6;
+      --shadow:0 20px 60px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      overflow:hidden;
+      background: radial-gradient(1200px 1200px at 85% -10%, #2b1f52, transparent 60%),
+                  radial-gradient(1000px 1000px at -10% 110%, #1c2541, transparent 60%),
+                  linear-gradient(120deg, var(--bg-1), var(--bg-2));
+      animation:bg-hue 14s linear infinite;
+    }
+    @keyframes bg-hue {from{filter:hue-rotate(0)}to{filter:hue-rotate(360deg)}}
+    .bokeh{position:fixed; inset:0; pointer-events:none; z-index:0;}
+    .bokeh span{
+      position:absolute; width:14px; height:14px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #fff, transparent 60%);
+      opacity:.15; filter:blur(2px);
+      animation:float 18s linear infinite;
+    }
+    @keyframes float{
+      from{transform:translateY(110vh) translateX(var(--x)) scale(var(--s))}
+      to{transform:translateY(-10vh) translateX(calc(var(--x) + var(--drift))) scale(var(--s))}
+    }
+    .wrap{
+      position:relative; z-index:2;
+      height:100%; width:100%;
+      display:grid; place-items:center;
+      perspective:1200px;
+    }
+    .card{
+      width:min(860px, 92vw);
+      padding:36px 30px 28px;
+      background:linear-gradient(180deg, var(--card), rgba(12,8,24,.8));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      box-shadow:var(--shadow), inset 0 0 60px rgba(255,255,255,.03);
+      transform-style:preserve-3d;
+      transform:rotateX(8deg) rotateY(-8deg);
+      transition:transform .25s ease;
+    }
+    .card:hover{transform:rotateX(0deg) rotateY(0deg)}
+    .badge{
+      display:inline-block;
+      padding:6px 12px; border-radius:999px;
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      color:#1a1029; font-weight:700; letter-spacing:.4px; font-size:.78rem;
+      box-shadow:0 0 20px rgba(255, 119, 233, .35);
+    }
+    .title{
+      margin:16px 0 10px;
+      font-family:"Fugaz One", system-ui;
+      font-size: clamp(28px, 6vw, 54px);
+      line-height:1.05;
+      letter-spacing:.5px;
+      text-shadow:0 6px 40px rgba(94,243,255,.25), 0 0 0 #0000;
+      background:linear-gradient(90deg, #fff 20%, #c0f7ff 50%, #ffd6fb 80%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .subtitle{
+      margin:0 0 18px; color:var(--muted);
+      font-weight:300; letter-spacing:.3px
+    }
+    .type{
+      min-height:2.2em;
+      font-size: clamp(16px, 3.3vw, 22px);
+      font-weight:600;
+      white-space:nowrap;
+      overflow:hidden;
+      border-right:3px solid rgba(255,255,255,.8);
+      animation:cursor .8s steps(1) infinite;
+    }
+    @keyframes cursor{50%{border-right-color:transparent}}
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:22px
+    }
+    .btn{
+      cursor:pointer; user-select:none;
+      padding:12px 18px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      color:var(--text); font-weight:700; letter-spacing:.3px;
+      backdrop-filter: blur(6px);
+      transition:transform .08s ease, box-shadow .2s ease;
+      box-shadow:0 8px 26px rgba(0,0,0,.25);
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    .btn--primary{
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      color:#171223; border:none;
+      box-shadow:0 14px 34px rgba(94,243,255,.25), 0 0 0 #0000;
+    }
+    .balloons{position:fixed; inset:0; pointer-events:none; z-index:1}
+    .balloon{
+      position:absolute; width:48px; height:58px; border-radius:50% 50% 48% 48%;
+      background: radial-gradient(circle at 30% 30%, #fff6, transparent 55%), var(--c);
+      box-shadow: inset -6px -10px 20px #0003;
+      transform:translateY(110vh) scale(var(--s));
+      animation:rise var(--t) linear infinite;
+    }
+    .balloon::after{
+      content:""; position:absolute; left:50%; top:56px; width:2px; height:28px;
+      transform:translateX(-50%);
+      background:linear-gradient(to bottom, #fff6, #fff1, transparent 85%);
+    }
+    @keyframes rise{
+      from{transform:translateY(110vh) translateX(var(--x)) scale(var(--s)) rotate(-6deg)}
+      to{transform:translateY(-15vh) translateX(calc(var(--x) + var(--drift))) scale(var(--s)) rotate(6deg)}
+    }
+    .confetti{
+      position:fixed; left:50%; top:50%;
+      width:10px; height:14px; background:var(--color);
+      transform:translate(-50%,-50%) translate(0,0) rotate(0);
+      opacity:1; border-radius:3px; pointer-events:none; z-index:5;
+      animation:pop var(--dur) cubic-bezier(.14,.68,.16,1.01) forwards;
+    }
+    .confetti.is-circle{border-radius:50%}
+    .confetti.is-tri{clip-path: polygon(50% 0, 0 100%, 100% 100%)}
+    @keyframes pop{
+      92%{opacity:1}
+      100%{
+        transform:translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--rot));
+        opacity:0
+      }
+    }
+    .gift-box-container{
+      position:fixed;
+      left:50%; top:50%;
+      transform:translate(-50%,-50%);
+      z-index:10;
+      cursor:pointer;
+      text-align:center;
+      animation:floatGift 2s ease-in-out infinite;
+    }
+    @keyframes floatGift{
+      0%,100%{transform:translate(-50%,-50%) translateY(0);}
+      50%{transform:translate(-50%,-50%) translateY(-10px);}
+    }
+    .gift-text{
+      margin-top:8px;
+      font-size:1rem;
+      color:var(--accent2);
+      font-weight:700;
+      text-shadow:0 2px 8px rgba(0,0,0,.4);
+    }
+    .foot{
+      margin-top:14px; font-size:.8rem; color:#cfd3ff90
+    }
+    .foot a{color:#e6e8ff}
+  </style>
+</head>
+<body>
+  <div class="bokeh" id="bokeh"></div>
+  <div class="balloons" id="balloons"></div>
+
+  <div class="wrap">
+    <section class="card" id="card">
+      <span class="badge">✨ Happy Birthday!</span>
+      <h1 class="title" id="title">Selamat Ulang Tahun 🎉</h1>
+      <p class="subtitle" id="subtitle"></p>
+      <div class="type" id="typewriter"></div>
+      <div class="actions">
+        <button class="btn btn--primary" id="btnBoom">Buka Kejutan 🎊</button>
+      </div>
+      <div class="foot">Tip: klik “Buka Kejutan” buat lihat kejutan, lalu klik kadonya yaa!</div>
+    </section>
+  </div>
+
+  <script>
+    const NAME = "Cacaa Cantikk";
+    const WISHES = [
+      
+      `Tambah cantikk, Tambah Sayang ke Akbar ;>`,
+    ];
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    title.innerText = `Selamat Ulang Tahun, ${NAME}! 🎂`;
+    subtitle.innerText = `Hari spesial buat sayangkuu — semoga diusia sekarang makin berkah lagii.`;
+    const TW = document.getElementById('typewriter');
+    let twIdx = 0, charIdx = 0, deleting = false, hold = 0;
+    function typeLoop(){
+      const text = WISHES[twIdx % WISHES.length];
+      if(!deleting){
+        TW.textContent = text.slice(0, ++charIdx);
+        if(charIdx === text.length){ hold++; if(hold>18){ deleting = true; hold = 0; } }
+      }else{
+        TW.textContent = text.slice(0, --charIdx);
+        if(charIdx === 0){ deleting = false; twIdx++; }
+      }
+      setTimeout(typeLoop, deleting ? 18 : 24);
+    }
+    typeLoop();
+    const bokeh = document.getElementById('bokeh');
+    for(let i=0;i<40;i++){
+      const s = document.createElement('span');
+      const x = (Math.random()*100|0) + 'vw';
+      const drift = (Math.random()*60-30) + 'vw';
+      s.style.setProperty('--x', x);
+      s.style.setProperty('--drift', drift);
+      s.style.setProperty('--s', (Math.random()*0.9+0.4).toFixed(2));
+      s.style.left = (Math.random()*100|0) + 'vw';
+      s.style.animationDelay = (-Math.random()*18).toFixed(2)+'s';
+      bokeh.appendChild(s);
+    }
+    const BAL_COLORS = [
+      'linear-gradient(180deg,#ff9ad6,#fe5fd0)',
+      'linear-gradient(180deg,#9df7ff,#5ef3ff)',
+      'linear-gradient(180deg,#ffd479,#ffb347)',
+      'linear-gradient(180deg,#b0ff92,#6df58f)',
+      'linear-gradient(180deg,#d1c2ff,#a892ff)',
+    ];
+    const balloons = document.getElementById('balloons');
+    function spawnBalloons(batch=10){
+      for(let i=0;i<batch;i++){
+        const b = document.createElement('div');
+        b.className='balloon';
+        b.style.setProperty('--c', BAL_COLORS[Math.random()*BAL_COLORS.length|0]);
+        b.style.setProperty('--x', (Math.random()*100|0)+'vw');
+        b.style.setProperty('--drift', (Math.random()*20-10)+'vw');
+        b.style.setProperty('--s', (Math.random()*0.6+0.7).toFixed(2));
+        b.style.setProperty('--t', (Math.random()*14+12).toFixed(2)+'s');
+        b.style.left = (Math.random()*100|0)+'vw';
+        b.style.animationDelay = (-Math.random()*12).toFixed(2)+'s';
+        balloons.appendChild(b);
+        setTimeout(()=>b.remove(), 16000);
+      }
+    }
+    spawnBalloons(18);
+    setInterval(()=>spawnBalloons(6), 3500);
+    const COLORS = ['#ff77e9','#5ef3ff','#ffd166','#06d6a0','#a78bfa','#f472b6','#60a5fa','#fca5a5'];
+    function boomConfetti(count=240){
+      for(let i=0;i<count;i++){
+        const e = document.createElement('div');
+        e.className='confetti';
+        const r = Math.random();
+        if(r<.33){ e.classList.add('is-circle'); }
+        else if(r>.66){ e.classList.add('is-tri'); }
+        const angle = Math.random()*Math.PI*2;
+        const power = 160 + Math.random()*520;
+        const dx = Math.cos(angle)*power + 'px';
+        const dy = Math.sin(angle)*power + 'px';
+        const rot = (Math.random()*720 - 360) + 'deg';
+        e.style.setProperty('--dx', dx);
+        e.style.setProperty('--dy', dy);
+        e.style.setProperty('--rot', rot);
+        e.style.setProperty('--dur', (0.8 + Math.random()*1.2).toFixed(2)+'s');
+        e.style.setProperty('--color', COLORS[Math.random()*COLORS.length|0]);
+        document.body.appendChild(e);
+        e.addEventListener('animationend', ()=>e.remove());
+      }
+    }
+    const card = document.getElementById('card');
+    let rect = null;
+    function onMove(ev){
+      rect = rect || card.getBoundingClientRect();
+      const x = (ev.clientX - rect.left) / rect.width - .5;
+      const y = (ev.clientY - rect.top) / rect.height - .5;
+      card.style.transform = `rotateX(${(-y*10+6).toFixed(2)}deg) rotateY(${(x*12-6).toFixed(2)}deg)`;
+    }
+    function onLeave(){ card.style.transform = `rotateX(8deg) rotateY(-8deg)`; }
+    card.addEventListener('mousemove', onMove);
+    card.addEventListener('mouseleave', onLeave);
+
+    // === Fitur kado mengambang + teks ===
+    const hadiahLink = "https://link.dana.id/danakaget?c=sxdkg5eh2&r=jz0lmN&orderId=20250814101214315215010300166113835652355";
+    function tampilkanKado(){
+      // Hapus kado lama kalau ada
+      const old = document.querySelector('.gift-box-container');
+      if(old) old.remove();
+
+      const container = document.createElement('div');
+      container.className = "gift-box-container";
+      container.onclick = () => { window.location.href = hadiahLink; };
+
+      const gift = document.createElement('img');
+      gift.src = "kado1.png";
+      gift.width = 150;
+      gift.height = 150;
+      gift.style.opacity = "0.7"; // transparansi 70%
+
+      const text = document.createElement('div');
+      text.className = "gift-text";
+
+      container.appendChild(gift);
+      container.appendChild(text);
+      document.body.appendChild(container);
+    }
+
+    document.getElementById('btnBoom').addEventListener('click', ()=>{
+      boomConfetti(320);
+      spawnBalloons(10);
+      tampilkanKado();
+    });
+
+    addEventListener('resize', ()=>{rect=null});
+  </script>
+  <audio id="bgMusic" src="hbd.mp3" autoplay loop></audio>
+
+<script>
+window.addEventListener('load', () => {
+  const music = document.getElementById('bgMusic');
+  
+  // Coba langsung play (kalau browser izinkan)
+  let playPromise = music.play();
+  
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // Kalau gagal, tunggu interaksi pertama user
+      document.addEventListener('click', () => {
+        music.play();
+      }, { once: true });
+    });
+  }
+});
+</script>
+</body>
+</html>
